@@ -6,6 +6,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a clean, well-structured Rummikub implementation designed to be an exemplar of readable Python code. The codebase serves as a learning resource through its clarity and organization. It implements a multiplayer game for human players taking turns at the same computer.
 
+**Key Features:**
+- Complete working game with full rule implementation
+- Extensive beginner-friendly documentation in `docs/` directory
+- Comprehensive unit test coverage
+- No external dependencies (uses only Python standard library)
+- Clear separation of concerns across modules
+
 ## Development Commands
 
 ```bash
@@ -29,12 +36,24 @@ python main.py --no-color
 
 The codebase follows standard software engineering practices with clear separation of concerns:
 
+### Core Game Files
 - **tiles.py**: Tile and Deck classes, tile factory methods
 - **rules.py**: Rule validation functions (is_valid_group, is_valid_run, etc.)
 - **game.py**: Game state management, turn logic, win conditions
 - **player.py**: Simple Player class for tracking player state
 - **display.py**: Console rendering, user input handling
 - **main.py**: Application entry point, menu system
+
+### Documentation Structure
+- **docs/index.md**: Entry point with visual overview
+- **docs/getting-started/**: Installation, running, and troubleshooting guides
+- **docs/understanding-the-code/**: Architecture overview, Python basics, file structure
+- **docs/game-mechanics/**: Rules, implementation details, game flow
+- **docs/making-changes/**: Modification guides from simple to advanced
+- **docs/reference/**: Glossary, file reference, common patterns
+- **docs/contributing.md**: Guide for contributors
+
+The documentation includes Mermaid diagrams for visual learning.
 
 ## Code Standards
 
@@ -153,6 +172,8 @@ def create_standard_deck() -> List[Tile]:
 - Code should be professional yet exceptionally clear
 - Avoid "clever" Python idioms that might confuse beginners
 - Focus on demonstrating good software design through example
+- The extensive documentation is designed for absolute beginners
+- When making changes, consider impact on educational value
 
 ## Player Management
 
@@ -169,3 +190,19 @@ The Player class is intentionally simple:
 - Intuitive menu system
 - Helpful error messages that guide players
 - Visual tile representation: [5 red], [Joker], etc.
+
+## Documentation Philosophy
+
+The `docs/` directory contains ~5,000 lines of documentation that:
+- Assumes no programming knowledge
+- Uses the familiar Rummikub game as a teaching vehicle
+- Progresses from installation to making modifications
+- Includes visual diagrams (Mermaid) for complex concepts
+- Provides hands-on examples and exercises
+- Defines all technical terms when first introduced
+
+When assisting users:
+- Point them to relevant documentation sections
+- Maintain the beginner-friendly approach
+- Use clear, simple language
+- Provide context before diving into code
