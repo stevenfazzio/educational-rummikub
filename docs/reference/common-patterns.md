@@ -341,8 +341,8 @@ def is_valid_run(tiles: List[Tile]) -> bool:
     
     A valid run contains:
     - At least 3 tiles
-    - Consecutive numbers (e.g., 5,6,7)
-    - All the same color
+    - Consecutive numbers (with jokers filling gaps or extending)
+    - All the same color (except jokers)
     - No duplicate numbers
     
     Args:

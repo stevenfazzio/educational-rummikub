@@ -74,7 +74,7 @@ def is_valid_run(tiles: List[Tile]) -> bool:
     
     A valid run contains:
     - At least 3 tiles
-    - Consecutive numbers (with jokers filling gaps)
+    - Consecutive numbers (with jokers filling gaps or extending)
     - All tiles of the same color (except jokers)
     
     Args:
@@ -86,8 +86,12 @@ def is_valid_run(tiles: List[Tile]) -> bool:
     if not tiles:
         return False
     
-    # Check minimum size
+    # Check size constraints
     if len(tiles) < MIN_SET_SIZE:
+        return False
+    
+    # Maximum possible run length is 13 (numbers 1-13)
+    if len(tiles) > 13:
         return False
     
     # Separate jokers from regular tiles
@@ -108,30 +112,58 @@ def is_valid_run(tiles: List[Tile]) -> bool:
     # Sort regular tiles by number
     regular_tiles.sort(key=lambda t: t.number)
     
-    # Check if we can form a consecutive sequence using jokers
-    if not regular_tiles:
-        return True  # All jokers (already checked we have at least 3 tiles)
+    # Check for duplicate numbers (not allowed in runs)
+    numbers = [t.number for t in regular_tiles]
+    if len(numbers) != len(set(numbers)):
+        return False
+    
+    # If only one regular tile, jokers can extend in either direction
+    if len(regular_tiles) == 1:
+        # With n jokers, we can make runs of length n+1
+        return len(jokers) >= MIN_SET_SIZE - 1
     
     # Calculate gaps between consecutive regular tiles
-    jokers_needed = 0
+    jokers_needed_for_gaps = 0
     for i in range(1, len(regular_tiles)):
         gap = regular_tiles[i].number - regular_tiles[i-1].number - 1
         if gap < 0:
-            # Duplicate number in same color
+            # This shouldn't happen due to sorting, but be safe
             return False
-        jokers_needed += gap
+        jokers_needed_for_gaps += gap
     
-    # Check if we have enough jokers to fill gaps
-    if jokers_needed > len(jokers):
+    # Check if we have enough jokers to fill internal gaps
+    if jokers_needed_for_gaps > len(jokers):
         return False
     
-    # Check if total length makes sense
-    # (highest number - lowest number + 1) should equal total tiles
-    expected_length = regular_tiles[-1].number - regular_tiles[0].number + 1
-    if expected_length != len(tiles):
+    # Calculate the span of regular tiles
+    span = regular_tiles[-1].number - regular_tiles[0].number + 1
+    
+    # Remaining jokers after filling gaps
+    extra_jokers = len(jokers) - jokers_needed_for_gaps
+    
+    # Total length must equal span + extra jokers (which extend the run)
+    if len(tiles) != span + extra_jokers:
         return False
     
-    return True
+    # Check that numbers stay within valid range (1-13)
+    # Minimum possible starting number
+    min_start = regular_tiles[0].number - extra_jokers
+    # Maximum possible ending number  
+    max_end = regular_tiles[-1].number + extra_jokers
+    
+    # We need at least one valid placement of jokers
+    # Try different distributions of extra jokers at start/end
+    for jokers_at_start in range(extra_jokers + 1):
+        jokers_at_end = extra_jokers - jokers_at_start
+        
+        start_num = regular_tiles[0].number - jokers_at_start
+        end_num = regular_tiles[-1].number + jokers_at_end
+        
+        # Check if this configuration keeps all numbers in valid range
+        if start_num >= 1 and end_num <= 13:
+            return True
+    
+    return False
 
 
 def is_valid_set(tiles: List[Tile]) -> bool:

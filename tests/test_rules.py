@@ -129,10 +129,44 @@ class TestValidRun(unittest.TestCase):
         ]
         self.assertTrue(is_valid_run(run))
         
-        # Run with joker at end
+        # Run with joker at end (extending)
         run = [
             create_tile(11, 'orange'),
             create_tile(12, 'orange'),
+            create_joker()
+        ]
+        self.assertTrue(is_valid_run(run))
+        
+        # Run with joker at beginning (extending)
+        run = [
+            create_joker(),
+            create_tile(2, 'red'),
+            create_tile(3, 'red')
+        ]
+        self.assertTrue(is_valid_run(run))
+        
+        # Run with multiple jokers extending
+        run = [
+            create_joker(),
+            create_joker(),
+            create_tile(7, 'blue')
+        ]
+        self.assertTrue(is_valid_run(run))
+        
+        # Run with jokers at both ends
+        run = [
+            create_joker(),
+            create_tile(6, 'black'),
+            create_tile(7, 'black'),
+            create_tile(8, 'black'),
+            create_joker()
+        ]
+        self.assertTrue(is_valid_run(run))
+        
+        # Single regular tile with two jokers
+        run = [
+            create_tile(5, 'red'),
+            create_joker(),
             create_joker()
         ]
         self.assertTrue(is_valid_run(run))
@@ -180,6 +214,23 @@ class TestValidRun(unittest.TestCase):
         
         # All jokers
         run = [create_joker(), create_joker(), create_joker()]
+        self.assertFalse(is_valid_run(run))
+        
+        # Not enough jokers to fill large gap
+        run = [
+            create_tile(1, 'red'),
+            create_joker(),
+            create_tile(10, 'red')  # Gap of 8, but only 1 joker
+        ]
+        self.assertFalse(is_valid_run(run))
+        
+        # Single tile with too many jokers extending past valid range
+        run = []
+        for _ in range(13):  # 13 jokers
+            run.append(create_joker())
+        run.append(create_tile(7, 'blue'))  # Plus one regular tile
+        # Would need numbers 1-13 or -6 to 7 or 7 to 20, etc.
+        # With 14 tiles and only range 1-13, impossible
         self.assertFalse(is_valid_run(run))
 
 
