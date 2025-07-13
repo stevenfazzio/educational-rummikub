@@ -304,12 +304,12 @@ graph LR
     
     player --> tiles
     
-    style main fill:#ffe0b2
-    style game fill:#fff9c4
-    style rules fill:#fff9c4
-    style player fill:#c8e6c9
-    style tiles fill:#c8e6c9
-    style display fill:#e1bee7
+    style main fill:#FF8A65,stroke:#D84315,stroke-width:2px,color:#000
+    style game fill:#FFF176,stroke:#F57F17,stroke-width:2px,color:#000
+    style rules fill:#FFF176,stroke:#F57F17,stroke-width:2px,color:#000
+    style player fill:#81C784,stroke:#388E3C,stroke-width:2px,color:#000
+    style tiles fill:#81C784,stroke:#388E3C,stroke-width:2px,color:#000
+    style display fill:#BA68C8,stroke:#6A1B9A,stroke-width:2px,color:#fff
 ```
 
 Key insights from the dependency graph:

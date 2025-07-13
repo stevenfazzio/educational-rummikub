@@ -43,12 +43,12 @@ graph TB
     D --> F
     E --> F
     
-    style A fill:#e1f5fe
-    style B fill:#e1f5fe
-    style C fill:#fff3e0
-    style D fill:#fff3e0
-    style E fill:#e8f5e9
-    style F fill:#e8f5e9
+    style A fill:#4FC3F7,stroke:#1976D2,stroke-width:2px,color:#000
+    style B fill:#4FC3F7,stroke:#1976D2,stroke-width:2px,color:#000
+    style C fill:#FFB74D,stroke:#F57C00,stroke-width:2px,color:#000
+    style D fill:#FFB74D,stroke:#F57C00,stroke-width:2px,color:#000
+    style E fill:#81C784,stroke:#388E3C,stroke-width:2px,color:#000
+    style F fill:#81C784,stroke:#388E3C,stroke-width:2px,color:#000
 ```
 
 The diagram shows three layers:

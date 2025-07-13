@@ -219,14 +219,14 @@ flowchart TD
     Q -->|Yes| H
     Q -->|No| R[Return: Would break set]
     
-    style H fill:#90EE90
-    style C fill:#FFB6C1
-    style E fill:#FFB6C1
-    style I fill:#FFB6C1
-    style K fill:#FFB6C1
-    style N fill:#FFB6C1
-    style P fill:#FFB6C1
-    style R fill:#FFB6C1
+    style H fill:#66BB6A,stroke:#2E7D32,stroke-width:2px,color:#fff
+    style C fill:#EF5350,stroke:#C62828,stroke-width:2px,color:#fff
+    style E fill:#EF5350,stroke:#C62828,stroke-width:2px,color:#fff
+    style I fill:#EF5350,stroke:#C62828,stroke-width:2px,color:#fff
+    style K fill:#EF5350,stroke:#C62828,stroke-width:2px,color:#fff
+    style N fill:#EF5350,stroke:#C62828,stroke-width:2px,color:#fff
+    style P fill:#EF5350,stroke:#C62828,stroke-width:2px,color:#fff
+    style R fill:#EF5350,stroke:#C62828,stroke-width:2px,color:#fff
 ```
 
 ```python
