@@ -100,9 +100,8 @@ Your Options:
 2. Sort tiles by number
 3. Play new meld
 4. Draw a tile
-5. End turn
 
-Enter your choice (1-5):
+Enter your choice (1-4):
 ```
 
 ## Understanding the Display
@@ -133,10 +132,7 @@ Press `3` to play tiles. You'll need to form valid sets:
 - **Runs**: 3+ consecutive numbers in the same color (like [5 red] [6 red] [7 red])
 
 ### 3. Drawing a Tile
-Press `4` if you can't (or don't want to) play. You'll get one new tile.
-
-### 4. Ending Your Turn
-Press `5` when you're done making plays.
+Press `4` if you can't (or don't want to) play. You'll get one new tile and your turn ends immediately.
 
 ## Your First Meld
 

@@ -199,9 +199,9 @@ class TestMoveValidation(unittest.TestCase):
         self.assertFalse(is_valid)
         self.assertIn("target set", error.lower())
         
-        # Invalid - would make set invalid
+        # Invalid - would make set invalid (adding wrong number)
         move = Move(0, MoveType.ADD_TO_EXISTING, 
-                   [alice.tiles[3]],  # 5 red - duplicate color
+                   [alice.tiles[0]],  # 10 red - wrong number for group of 5s
                    target_set_index=0)
         is_valid, error = self.game.validate_move(move)
         self.assertFalse(is_valid)
@@ -240,8 +240,8 @@ class TestMoveApplication(unittest.TestCase):
         self.assertEqual(len(alice.tiles), initial_hand_size + 1)
         self.assertEqual(len(self.game.draw_pile), initial_deck_size - 1)
         
-        # Should still be Alice's turn after drawing
-        self.assertEqual(self.game.current_player_index, 0)
+        # Should be Bob's turn after drawing
+        self.assertEqual(self.game.current_player_index, 1)
     
     def test_apply_play_new_meld(self):
         """Test applying new meld plays."""
@@ -260,16 +260,6 @@ class TestMoveApplication(unittest.TestCase):
         
         # Should be Bob's turn now
         self.assertEqual(self.game.current_player_index, 1)
-    
-    def test_apply_end_turn(self):
-        """Test ending turn without playing."""
-        initial_player = self.game.current_player_index
-        
-        move = Move(0, MoveType.END_TURN)
-        success, error = self.game.apply_move(move)
-        
-        self.assertTrue(success)
-        self.assertEqual(self.game.current_player_index, 1)  # Next player's turn
     
     def test_win_condition(self):
         """Test that game ends when player runs out of tiles."""

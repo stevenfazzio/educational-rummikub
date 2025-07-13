@@ -31,7 +31,6 @@ class MoveType(Enum):
     PLAY_NEW_MELD = "play_new_meld"
     ADD_TO_EXISTING = "add_to_existing"
     REARRANGE_TABLE = "rearrange_table"
-    END_TURN = "end_turn"
 
 
 @dataclass
@@ -208,9 +207,6 @@ class GameState:
             
             return True, None
         
-        elif move.move_type == MoveType.END_TURN:
-            return True, None
-        
         return False, "Unknown move type"
     
     def apply_move(self, move: Move) -> Tuple[bool, Optional[str]]:
@@ -270,9 +266,8 @@ class GameState:
             self.phase = GamePhase.FINISHED
             return True, None
         
-        # Move to next turn if not drawing
-        if move.move_type != MoveType.DRAW:
-            self.next_turn()
+        # Move to next turn after any move (including drawing)
+        self.next_turn()
         
         return True, None
     
@@ -352,9 +347,6 @@ class GameState:
         # Can always draw if tiles available
         if self.can_draw():
             valid_moves.append(Move(player_id, MoveType.DRAW))
-        
-        # Can always end turn (do nothing)
-        valid_moves.append(Move(player_id, MoveType.END_TURN))
         
         # Note: A full implementation would find all possible melds,
         # additions to existing sets, and table rearrangements

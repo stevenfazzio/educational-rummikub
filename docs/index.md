@@ -22,7 +22,7 @@ graph TB
     end
     
     subgraph "Actions"
-        Menu["Sort tiles | Play meld | Add to existing | Draw tile | End turn"]
+        Menu["Sort tiles | Play meld | Add to existing | Draw tile"]
     end
 ```
 

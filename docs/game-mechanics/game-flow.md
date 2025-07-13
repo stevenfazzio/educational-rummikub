@@ -62,9 +62,8 @@ print("1. Sort tiles by color")
 print("2. Sort tiles by number") 
 print("3. Play new meld")
 print("4. Draw a tile")
-print("5. End turn")
 
-choice = input("\nEnter your choice (1-5): ")
+choice = input("\nEnter your choice (1-4): ")
 ```
 
 The game waits for you to type a number.
@@ -249,7 +248,7 @@ player.has_melded = True
 if move.move_type == MoveType.DRAW:
     drawn_tile = self.draw_pile.draw_tile()
     player.add_tile(drawn_tile)
-    # Note: Turn does NOT advance after drawing!
+    # Turn advances to next player
 ```
 
 ### Rearranging Table

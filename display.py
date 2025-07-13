@@ -198,8 +198,6 @@ class Display:
                 print(f"Added {len(move.tiles)} tile(s) to existing set")
             elif move.move_type == MoveType.REARRANGE_TABLE:
                 print("Rearranged table sets")
-            elif move.move_type == MoveType.END_TURN:
-                print("Ended turn")
         else:
             print(self._colorize(f"Invalid move: {message}", 'red'))
     
@@ -347,7 +345,7 @@ class GameInterface:
         
         # Main menu
         options = ["Draw a tile", "Play new meld", "Add to existing set", 
-                  "Rearrange table", "End turn"]
+                  "Rearrange table"]
         
         # Remove draw option if no tiles left
         if not game_state.can_draw():
@@ -372,7 +370,8 @@ class GameInterface:
             )
             
             if not selected_tiles:
-                return Move(player_id, MoveType.END_TURN)
+                # Cancelled - show menu again
+                return self.get_human_move(game_state, player_id)
             
             return Move(player_id, MoveType.PLAY_NEW_MELD, selected_tiles)
         
@@ -394,10 +393,8 @@ class GameInterface:
         
         elif selected_option == "Rearrange table":
             print("Table rearrangement is not implemented in this interface.")
-            return Move(player_id, MoveType.END_TURN)
-        
-        else:  # End turn
-            return Move(player_id, MoveType.END_TURN)
+            # Go back to menu
+            return self.get_human_move(game_state, player_id)
 
 
 if __name__ == "__main__":
