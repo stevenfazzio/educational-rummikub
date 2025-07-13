@@ -12,17 +12,17 @@ Here's a simplified view of what you'll see when playing:
 
 ```mermaid
 graph TB
-    subgraph "Table (Shared Area)"
-        Set1["[5 red] [5 blue] [5 black]<br/>Group of 5s"]
-        Set2["[7 blue] [8 blue] [9 blue]<br/>Blue run"]
+    subgraph "Game Table"
+        Set1["Group: 5 red, 5 blue, 5 black"]
+        Set2["Run: 7 blue, 8 blue, 9 blue"]
     end
     
-    subgraph "Your Hand"
-        Tiles["[3 red] [6 orange] [10 red] [10 blue]<br/>[10 black] [11 red] [12 red] [Joker]"]
+    subgraph "Your Tiles"
+        Hand["3 red, 6 orange, 10 red, 10 blue, 10 black, 11 red, 12 red, Joker"]
     end
     
-    subgraph "Game Menu"
-        Menu["1. Sort tiles<br/>2. Play new meld<br/>3. Add to existing<br/>4. Draw tile<br/>5. End turn"]
+    subgraph "Actions"
+        Menu["Sort tiles | Play meld | Add to existing | Draw tile | End turn"]
     end
 ```
 
