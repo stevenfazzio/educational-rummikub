@@ -147,21 +147,21 @@ stateDiagram-v2
     FINISHED --> [*]: Game ends
     
     note right of NOT_STARTED
-        - Players created
-        - No tiles dealt yet
-        - Waiting to start
+        Players created
+        No tiles dealt yet
+        Waiting to start
     end note
     
     note right of IN_PROGRESS
-        - Tiles dealt
-        - Players taking turns
-        - Checking for winner
+        Tiles dealt
+        Players taking turns
+        Checking for winner
     end note
     
     note right of FINISHED
-        - Winner declared
-        - Scores calculated
-        - Game over
+        Winner declared
+        Scores calculated
+        Game over
     end note
 ```
 
