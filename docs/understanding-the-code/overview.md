@@ -2,17 +2,18 @@
 
 Let's explore how Educational Rummikub is built! Don't worry if you've never looked at code before - we'll take it step by step.
 
-## Think of It Like a Restaurant 🍽️
+## Think of It Like a Board Game Night 🎲
 
-To understand how this game works, imagine a restaurant:
+To understand how this game works, imagine organizing a game night:
 
-- **The Kitchen** (`tiles.py`, `rules.py`) - Where the basic ingredients are prepared
-- **The Manager's Office** (`game.py`) - Where all the business logic happens
-- **The Waitstaff** (`display.py`) - Who interact with customers
-- **The Dining Room** (`player.py`) - Where customers sit
-- **The Front Door** (`main.py`) - Where customers enter
+- **The Host** (`main.py`) - Organizes everything and starts the game
+- **The Game Table** (`display.py`) - Where everyone sees and plays the game
+- **The Game Master** (`game.py`) - Manages turns and enforces rules
+- **The Rulebook** (`rules.py`) - The official rules that say what's legal
+- **The Scorecards** (`player.py`) - Tracks what tiles each player has
+- **The Game Box** (`tiles.py`) - Contains all the physical game pieces
 
-Each part has a specific job, and they work together to create the experience!
+Each part has a specific job, and they work together to create the game experience!
 
 ## System Architecture
 
@@ -58,30 +59,32 @@ The diagram shows three layers:
 
 ## The Files and What They Do
 
-### 📦 `tiles.py` - The Game Pieces
-**What it does**: Defines what tiles are and how to create a deck
+### 🚪 `main.py` - The Host
+**What it does**: Entry point that organizes everything
 
-Think of this as the "game piece factory." It knows:
-- What a tile looks like (number + color)
-- How to create a full deck of 106 tiles
-- How to shuffle and deal tiles
+Like a game night host, this file:
+- Shows the main menu
+- Sets up new games
+- Connects all the other pieces
+- Starts the game loop
 
-**Key concept**: This file creates the building blocks everything else uses.
+**Key concept**: This is where the program begins.
 
-### 📋 `rules.py` - The Rule Book
-**What it does**: Checks if moves are legal
+### 🖥️ `display.py` - The Game Table
+**What it does**: Shows the game to players and gets their input
 
-Like a referee, this file answers questions:
-- "Is this a valid group?" (like [5 red] [5 blue] [5 black])
-- "Is this a valid run?" (like [7 blue] [8 blue] [9 blue])
-- "Does this initial meld have enough points?"
+Just like the physical table where you play, this file:
+- Shows everyone what's on the table
+- Displays each player's tiles (only to them!)
+- Gets player choices
+- Makes everything look nice with colors
 
-**Key concept**: This file never changes the game - it just says "yes" or "no" to moves.
+**Key concept**: This is the only file that talks to the player directly.
 
-### 🎮 `game.py` - The Game Manager
-**What it does**: Keeps track of everything happening in the game
+### 🎮 `game.py` - The Game Master
+**What it does**: Manages the game and enforces fairness
 
-This is the "brain" that:
+Like a game master who runs the game, this file:
 - Knows whose turn it is
 - Tracks what's on the table
 - Applies moves when players make them
@@ -89,36 +92,35 @@ This is the "brain" that:
 
 **Key concept**: This file manages the game state (what's happening right now).
 
-### 👤 `player.py` - The Players
-**What it does**: Represents each person playing
+### 📋 `rules.py` - The Rulebook
+**What it does**: The official rules that determine what's legal
 
-Simple but important - tracks:
+Like consulting the rulebook, this file answers:
+- "Is this a valid group?" (like [5 red] [5 blue] [5 black])
+- "Is this a valid run?" (like [7 blue] [8 blue] [9 blue])
+- "Does this initial meld have enough points?"
+
+**Key concept**: This file never changes the game - it just says "yes" or "no" to moves.
+
+### 👤 `player.py` - The Scorecards
+**What it does**: Keeps track of each player's tiles
+
+Like personal scorecards, this file tracks:
 - Player's name
-- Their tiles
+- Their tiles (their "hand")
 - Whether they've made their initial meld
 
 **Key concept**: This file is about data storage, not decision-making (humans make the decisions).
 
-### 🖥️ `display.py` - The Screen
-**What it does**: Shows the game to players and gets their input
+### 📦 `tiles.py` - The Game Box
+**What it does**: Contains all the game pieces
 
-This file handles:
-- Printing the table and tiles nicely
-- Showing menus
-- Getting player choices
-- Making things colorful
+Like the game box with all the tiles, this file:
+- Defines what a tile is (number + color)
+- Creates a full deck of 106 tiles
+- Can shuffle and deal tiles
 
-**Key concept**: This is the only file that talks to the player directly.
-
-### 🚪 `main.py` - The Entry Point
-**What it does**: Starts everything up
-
-When you run `python main.py`, this file:
-- Shows the main menu
-- Sets up new games
-- Connects all the other pieces
-
-**Key concept**: This is where the program begins.
+**Key concept**: This file creates the building blocks everything else uses.
 
 ## How They Work Together
 
